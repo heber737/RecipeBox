@@ -5,6 +5,7 @@ const RecipeModal = forwardRef(function RecipeModal(
   { modalType, onAddRecipe, onEditRecipe, formInput, setFormInput },
   ref
 ) {
+  console.log(formInput);
   const myModal1 = useRef(null);
   const buttonRef = useRef(null);
 
@@ -17,9 +18,10 @@ const RecipeModal = forwardRef(function RecipeModal(
   }, [buttonRef]);
 
   const handleFormInput = (e) => {
-    const newState = formInput;
-    newState[e.target.id] = e.target.value;
-    setFormInput({ ...newState });
+    setFormInput((prevState) => ({
+      ...prevState,
+      [e.target.id]: e.target.value,
+    }));
   };
 
   return (
