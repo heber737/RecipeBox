@@ -5,7 +5,6 @@ const RecipeModal = forwardRef(function RecipeModal(
   { modalType, onAddRecipe, onEditRecipe, formInput, setFormInput },
   ref
 ) {
-  console.log(formInput);
   const myModal1 = useRef(null);
   const buttonRef = useRef(null);
 
