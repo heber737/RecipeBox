@@ -6,7 +6,6 @@ import {
 
 import initialRecipes from "./initial-recipes.js";
 import { storageAvailable } from "./functions.js"
-import "./App.css";
 
 // COMPONENTS
 
