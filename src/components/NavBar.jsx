@@ -1,12 +1,21 @@
 /* eslint-disable react/prop-types */
-
 function NavBar({
   recipes,
-  onRecipeChange,
-  onModalClick,
   setFormInput,
   setModalType,
+  onRecipeChange,
+  onModalClick,
 }) {
+  function handlePlusIconClick() {
+    setModalType("add");
+    onModalClick();
+    setFormInput({
+      name: "",
+      ingredients: "",
+      steps: "",
+    });
+  }
+
   return (
     <div className="navbar bg-lime-400 text-slate-800 dark:text-slate-800">
       <div className="navbar-start">
@@ -37,9 +46,7 @@ function NavBar({
                   <li key={i}>
                     <button
                       value={i}
-                      onClick={(e) => {
-                        onRecipeChange(e);
-                      }}
+                      onClick={(e) => onRecipeChange(e)}
                       className="btn btn-sm btn-ghost truncate"
                     >
                       {recipe.name}
@@ -57,18 +64,7 @@ function NavBar({
         <a className="text-2xl font-black">RecipeBox</a>
       </div>
       <div className="navbar-end">
-        <button
-          className="btn btn-ghost"
-          onClick={() => {
-            setModalType("add");
-            onModalClick();
-            setFormInput({
-              name: "",
-              ingredients: "",
-              steps: "",
-            });
-          }}
-        >
+        <button className="btn btn-ghost" onClick={handlePlusIconClick}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             height="24px"

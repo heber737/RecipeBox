@@ -10,6 +10,26 @@ function RecipeDisplay({
   setModalType,
 }) {
   if (recipes.length > 0) {
+    const handleEditButtonClick = () => {
+      setModalType("edit");
+      onModalClick();
+      setFormInput({
+        name: recipes[currentRecipe]["name"],
+        ingredients: recipes[currentRecipe]["ingredients"],
+        steps: recipes[currentRecipe]["steps"],
+      });
+    };
+
+    const handleDeleteButtonClick = () => {
+      function getAuth() {
+        const response = confirm(
+          "Are you sure you want to delete this recipe definitely?"
+        );
+        return response;
+      }
+      onDeleteRecipe(getAuth());
+    };
+
     return (
       <div className="bg-inherti mx-auto mt-6 min-h-full max-w-3xl items-start px-6 pb-6 sm:px-8 md:pt-6 lg:bg-amber-100">
         <h1 className="pb-4 text-center text-3xl font-bold md:pb-6">
@@ -24,7 +44,7 @@ function RecipeDisplay({
                   {ingredient}
                 </li>
               );
-            },
+            }
           )}
         </ul>
         <h2 className="pb-4 text-2xl font-bold">Steps</h2>
@@ -41,15 +61,7 @@ function RecipeDisplay({
           <button
             id="edit-btn"
             className="btn basis-16 bg-lime-400 dark:border-none"
-            onClick={() => {
-              setModalType("edit");
-              onModalClick();
-              setFormInput({
-                name: recipes[currentRecipe]["name"],
-                ingredients: recipes[currentRecipe]["ingredients"],
-                steps: recipes[currentRecipe]["steps"],
-              });
-            }}
+            onClick={handleEditButtonClick}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,15 +76,7 @@ function RecipeDisplay({
           <button
             id="delete-button"
             className="btn basis-16 bg-red-400 dark:border-none"
-            onClick={() => {
-              function getAuth() {
-                const response = confirm(
-                  "Are you sure you want to delete this recipe definitely?",
-                );
-                return response;
-              }
-              onDeleteRecipe(getAuth());
-            }}
+            onClick={handleDeleteButtonClick}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"

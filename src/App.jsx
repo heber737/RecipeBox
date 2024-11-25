@@ -36,25 +36,24 @@ function App() {
     steps: "",
   });
   const [modalType, setModalType] = useState("");
-
   const modalButton = useRef(null);
 
-  function handleRecipeChange(event) {
+  const handleRecipeChange = event => {
     setCurrentRecipe(event.target.value);
   }
 
-  function handleAddRecipe() {
+  const handleAddRecipe = () => {
     setRecipes([...recipes, formInput]);
     setCurrentRecipe(recipes.length);
   }
 
-  function handleEditRecipe() {
+  const handleEditRecipe = () => {
     setRecipes((prev) => {
       return prev.toSpliced(currentRecipe, 1, formInput);
     });
   }
 
-  function handleDeleteRecipe(allow) {
+  const handleDeleteRecipe = allow => {
     if (allow) {
       setRecipes((prev) => {
         return prev.toSpliced(currentRecipe, 1);
@@ -67,7 +66,7 @@ function App() {
     }
   }
 
-  function handleModalClick() {
+  const handleModalClick = () => {
     modalButton.current.click();
   }
 
@@ -79,27 +78,27 @@ function App() {
     <div className="min-h-screen w-full bg-amber-50 dark:text-slate-800">
       <NavBar
         recipes={recipes}
-        onRecipeChange={handleRecipeChange}
         formInput={formInput}
-        onModalClick={handleModalClick}
         setFormInput={setFormInput}
         setModalType={setModalType}
+        onRecipeChange={handleRecipeChange}
+        onModalClick={handleModalClick}
       />
       <RecipeDisplay
         recipes={recipes}
         currentRecipe={currentRecipe}
-        onModalClick={handleModalClick}
-        onDeleteRecipe={handleDeleteRecipe}
         setFormInput={setFormInput}
         setModalType={setModalType}
+        onModalClick={handleModalClick}
+        onDeleteRecipe={handleDeleteRecipe}
       />
       <RecipeModal
-        onAddRecipe={handleAddRecipe}
-        onEditRecipe={handleEditRecipe}
         formInput={formInput}
-        setFormInput={setFormInput}
         modalType={modalType}
         ref={modalButton}
+        setFormInput={setFormInput}
+        onAddRecipe={handleAddRecipe}
+        onEditRecipe={handleEditRecipe}
       />
       <p className="pb-8 text-center font-bold">Created by Heber Villalobos</p>
     </div>
