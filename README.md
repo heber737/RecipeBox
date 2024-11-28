@@ -1,4 +1,4 @@
-# Twitch.tv API Use Example
+# Recipe Box
 
 ## Project Description
 
